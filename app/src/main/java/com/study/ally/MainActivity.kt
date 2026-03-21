@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import com.study.ally.presentation.navigation.AppNavHost
+import com.study.ally.presentation.navigation.MainScreen
 import com.study.ally.ui.theme.AllyTheme
 
 class MainActivity : ComponentActivity() {
@@ -13,7 +13,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             AllyTheme {
-                AppNavHost()
+                MainScreen()
             }
         }
     }
