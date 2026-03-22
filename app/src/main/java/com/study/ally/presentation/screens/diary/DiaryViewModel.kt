@@ -1,21 +1,53 @@
 package com.study.ally.presentation.screens.diary
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.study.ally.data.datastore.DataStoreManager
+import com.study.ally.domain.model.DiaryEntry
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.launch
 import java.time.LocalDateTime
 
-class DiaryViewModel : ViewModel() {
+// заменить ли System.currentTimeMillis() на LocalDateTime
 
-    private val _entries = MutableStateFlow<List<DiaryEntry>>(emptyList())
-    val entries: StateFlow<List<DiaryEntry>> = _entries
+class DiaryViewModel(
+    private val dataStore: DataStoreManager
+) : ViewModel() {
 
-    fun addEntry(text: String) {
-        val newEntry = DiaryEntry(
-            id = _entries.value.size + 1,
+    private val _input = MutableStateFlow("")
+    val input: StateFlow<String> = _input
+
+    val entries = dataStore.diaryFlow.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        emptyList()
+    )
+
+    fun onTextChange(value: String) {
+        _input.value = value
+    }
+
+    fun add() {
+
+        val text = _input.value.trim()
+
+        if (text.isEmpty()) return
+
+        val new = DiaryEntry(
+            id = System.currentTimeMillis().toInt(),
             text = text,
-            date = LocalDateTime.now()
+            timestamp = System.currentTimeMillis()
         )
-        _entries.value += newEntry
+
+        val updated = entries.value + new
+
+        viewModelScope.launch {
+            dataStore.saveDiary(updated)
+        }
+
+        _input.value = ""
     }
 }

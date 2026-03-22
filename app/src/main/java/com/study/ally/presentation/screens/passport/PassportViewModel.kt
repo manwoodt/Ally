@@ -2,26 +2,25 @@ package com.study.ally.presentation.screens.passport
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.study.ally.domain.model.Allergen
-import com.study.ally.domain.usecase.GetAllergensUseCase
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
+import com.study.ally.data.datastore.DataStoreManager
+import com.study.ally.domain.model.PassportData
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 class PassportViewModel(
-    private val getAllergensUseCase: GetAllergensUseCase
+    private val dataStore: DataStoreManager
 ) : ViewModel() {
 
-    private val _state = MutableStateFlow<List<Allergen>>(emptyList())
-    val state: StateFlow<List<Allergen>> = _state
+    val state = dataStore.passportFlow.stateIn(
+        viewModelScope,
+        SharingStarted.WhileSubscribed(5000),
+        PassportData("", "", "", "")
+    )
 
-    init {
-        load()
-    }
-
-    private fun load() {
+    fun save(data: PassportData) {
         viewModelScope.launch {
-            _state.value = getAllergensUseCase()
+            dataStore.savePassport(data)
         }
     }
 }
