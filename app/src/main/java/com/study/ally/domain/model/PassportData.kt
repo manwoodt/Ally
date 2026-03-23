@@ -7,5 +7,5 @@ data class PassportData(
     val allergens: List<String>,
     val medicines: List<Medicine>,
     val doctor: String,
-    val contact: String
+    val contact: String,
 )

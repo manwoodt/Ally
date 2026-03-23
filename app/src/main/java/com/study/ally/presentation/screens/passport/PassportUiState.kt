@@ -9,7 +9,7 @@ data class PassportUiState(
         doctor = "",
         contact = ""
     ),
-    val isEditing: Boolean = false
+    val isEditing: Boolean = false,
 )
 
 

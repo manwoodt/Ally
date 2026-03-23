@@ -1,21 +1,37 @@
 package com.study.ally.ui.theme
 
-import android.app.Activity
-import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.darkColorScheme
-import androidx.compose.material3.dynamicDarkColorScheme
-import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 
 private val PastelColors = lightColorScheme(
-    primary = Color(0xFFB3E5FC),
-    secondary = Color(0xFFFFF9C4),
-    background = Color(0xFFFFFBF2)
+    primary = Primary,
+    onPrimary = OnPrimary,
+
+    secondary = Secondary,
+    onSecondary = OnSecondary,
+
+    background = Background,
+    onBackground = OnBackground,
+
+    surface = Surface,
+    onSurface = OnSurface,
+
+    surfaceVariant = SurfaceVariant,
+    onSurfaceVariant = OnSurfaceVariant,
+
+    primaryContainer = PrimaryContainer,
+    onPrimaryContainer = OnPrimary,
+
+    secondaryContainer = SecondaryContainer,
+    onSecondaryContainer = OnSecondary,
+
+    surfaceContainer = SurfaceContainer,
+    surfaceContainerHigh = SurfaceContainerHigh,
+    surfaceContainerHighest = SurfaceContainerHighest,
+
+    outline = Outline
 )
 
 @Composable
@@ -23,20 +39,11 @@ fun AllyTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
     dynamicColor: Boolean = false,
-    content: @Composable () -> Unit
+    content: @Composable () -> Unit,
 ) {
-    val colorScheme = when {
-        dynamicColor && Build.VERSION.SDK_INT >= Build.VERSION_CODES.S -> {
-            val context = LocalContext.current
-            if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
-        }
-
-        darkTheme -> PastelColors
-        else -> PastelColors
-    }
 
     MaterialTheme(
-        colorScheme = colorScheme,
+        colorScheme = PastelColors,
         typography = Typography,
         content = content
     )

@@ -6,5 +6,5 @@ import kotlinx.serialization.Serializable
 data class DiaryEntry(
     val id: Int,
     val text: String,
-    val timestamp: Long
+    val timestamp: Long,
 )

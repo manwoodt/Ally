@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun Header(
     isEditing: Boolean,
-    onToggle: () -> Unit
+    onToggle: () -> Unit,
 ) {
     Row(
         modifier = Modifier.fillMaxWidth(),

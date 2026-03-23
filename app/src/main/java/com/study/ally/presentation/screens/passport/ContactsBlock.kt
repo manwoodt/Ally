@@ -17,7 +17,7 @@ fun ContactsBlock(
     contact: String,
     isEditing: Boolean,
     onDoctorChange: (String) -> Unit,
-    onContactChange: (String) -> Unit
+    onContactChange: (String) -> Unit,
 ) {
     Column {
 

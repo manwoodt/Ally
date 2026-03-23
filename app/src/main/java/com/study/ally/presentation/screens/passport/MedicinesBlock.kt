@@ -33,26 +33,26 @@ fun MedicinesBlock(
 
     Column {
 
-            Text("💊 Препараты", style = MaterialTheme.typography.titleMedium)
+        Text("💊 Препараты", style = MaterialTheme.typography.titleMedium)
 
-            Spacer(Modifier.height(6.dp))
+        Spacer(Modifier.height(6.dp))
 
 
-    Row() {
-        medicines.forEach { med ->
-            Card {
-                Column(Modifier.padding(12.dp)) {
-                    Text(med.name)
-                    Text(
-                        med.dosage,
-                        style = MaterialTheme.typography.bodySmall
-                    )
+        Row() {
+            medicines.forEach { med ->
+                Card {
+                    Column(Modifier.padding(12.dp)) {
+                        Text(med.name)
+                        Text(
+                            med.dosage,
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
                 }
-            }
 
-            Spacer(Modifier.width(6.dp))
+                Spacer(Modifier.width(6.dp))
+            }
         }
-    }
 
         if (isEditing) {
 

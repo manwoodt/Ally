@@ -1,6 +1,6 @@
 package com.study.ally.presentation.navigation
 
-import androidx.compose.material3.*
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.rememberNavController
 

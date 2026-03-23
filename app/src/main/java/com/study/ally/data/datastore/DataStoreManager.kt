@@ -1,9 +1,12 @@
 package com.study.ally.data.datastore
 
 import android.content.Context
-import androidx.datastore.preferences.core.*
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.study.ally.domain.model.*
+import com.study.ally.domain.model.DiaryEntry
+import com.study.ally.domain.model.PassportData
+import com.study.ally.domain.model.Symptom
 import kotlinx.coroutines.flow.map
 import kotlinx.serialization.json.Json
 
@@ -11,7 +14,7 @@ import kotlinx.serialization.json.Json
 private val Context.dataStore by preferencesDataStore("ally_prefs")
 
 class DataStoreManager(
-    private val context: Context
+    private val context: Context,
 ) {
 
     private val json = Json {
@@ -21,7 +24,6 @@ class DataStoreManager(
     private val PASSPORT = stringPreferencesKey("passport")
     private val DIARY = stringPreferencesKey("diary")
     private val SYMPTOMS = stringPreferencesKey("symptoms")
-
 
     val passportFlow = context.dataStore.data.map { prefs ->
         val raw = prefs[PASSPORT]

@@ -9,12 +9,10 @@ import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
-import java.time.LocalDateTime
 
-// заменить ли System.currentTimeMillis() на LocalDateTime
 
 class DiaryViewModel(
-    private val dataStore: DataStoreManager
+    private val dataStore: DataStoreManager,
 ) : ViewModel() {
 
     private val _input = MutableStateFlow("")

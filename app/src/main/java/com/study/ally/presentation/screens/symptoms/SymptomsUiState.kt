@@ -6,5 +6,5 @@ data class SymptomsUiState(
     val showSlider: Boolean = false,
     val intensity: Float = 1f,
     val selected: String? = null,
-    val symptoms: List<Symptom> = emptyList()
+    val symptoms: List<Symptom> = emptyList(),
 )

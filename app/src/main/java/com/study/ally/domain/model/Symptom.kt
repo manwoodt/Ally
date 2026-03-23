@@ -7,5 +7,5 @@ data class Symptom(
     val name: String,
     val intensity: Float,
     val timeOfDay: String,
-    val timestamp: Long
+    val timestamp: Long,
 )

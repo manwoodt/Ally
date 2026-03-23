@@ -20,9 +20,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.study.ally.domain.model.Symptom
 import com.study.ally.presentation.utils.toIntensityText
-import com.study.ally.presentation.utils.toReadableTime
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
@@ -110,37 +108,5 @@ fun SymptomsScreen(
             }
     }
 }
-@Composable
-fun SymptomItem(symptom: Symptom) {
 
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 6.dp),
-        elevation = CardDefaults.cardElevation(4.dp)
-    ) {
-        Column(modifier = Modifier.padding(12.dp)) {
 
-            Text(
-                text = symptom.name,
-                style = MaterialTheme.typography.bodyLarge
-            )
-
-            Text(
-                text = "Интенсивность: ${symptom.intensity.toIntensityText()}",
-                style = MaterialTheme.typography.bodyMedium
-            )
-
-            Text(
-                text = symptom.timeOfDay,
-                style = MaterialTheme.typography.bodySmall
-            )
-
-            Text(
-                text = symptom.timestamp.toReadableTime(),
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
-            )
-        }
-    }
-}

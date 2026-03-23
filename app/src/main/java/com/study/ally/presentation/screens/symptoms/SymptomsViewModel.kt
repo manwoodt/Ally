@@ -4,11 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.study.ally.data.datastore.DataStoreManager
 import com.study.ally.domain.model.Symptom
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 class SymptomsViewModel(
-    private val dataStore: DataStoreManager
+    private val dataStore: DataStoreManager,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(SymptomsUiState())

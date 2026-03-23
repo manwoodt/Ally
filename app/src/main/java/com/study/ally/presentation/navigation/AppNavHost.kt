@@ -14,7 +14,7 @@ import com.study.ally.presentation.screens.symptoms.SymptomsScreen
 @Composable
 fun AppNavHost(
     navController: NavHostController,
-    padding: PaddingValues
+    padding: PaddingValues,
 ) {
 
     NavHost(

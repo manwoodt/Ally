@@ -1,15 +1,16 @@
 package com.study.ally.presentation.navigation
 
-
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
+import androidx.compose.material.icons.filled.Edit
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Warning
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Screen(
     val route: String,
     val title: String,
     val icon: ImageVector,
-    val contentDescription: String
+    val contentDescription: String,
 ) {
 
     object Passport : Screen(

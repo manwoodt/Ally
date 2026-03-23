@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 fun AllergensBlock(
     allergens: List<String>,
     isEditing: Boolean,
-    onAdd: (String) -> Unit
+    onAdd: (String) -> Unit,
 ) {
 
     var input by remember { mutableStateOf("") }
@@ -52,7 +52,7 @@ fun AllergensBlock(
         }
 
         if (isEditing) {
-            Row (verticalAlignment = Alignment.CenterVertically) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 OutlinedTextField(
                     value = input,
                     onValueChange = { input = it },

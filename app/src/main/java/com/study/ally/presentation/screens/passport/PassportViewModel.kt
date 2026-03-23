@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
 class PassportViewModel(
-    private val dataStore: DataStoreManager
+    private val dataStore: DataStoreManager,
 ) : ViewModel() {
 
     private val _uiState = MutableStateFlow(PassportUiState())
