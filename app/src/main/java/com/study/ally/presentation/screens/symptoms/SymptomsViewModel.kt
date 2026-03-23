@@ -56,7 +56,7 @@ class SymptomsViewModel(
 
         val new = Symptom(
             name = name,
-            intensity = state.intensity.toInt(),
+            intensity = state.intensity,
             timeOfDay = time,
             timestamp = System.currentTimeMillis()
         )

@@ -5,7 +5,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Symptom(
     val name: String,
-    val intensity: Int,
+    val intensity: Float,
     val timeOfDay: String,
     val timestamp: Long
 )
