@@ -26,13 +26,10 @@ fun PassportScreen(
     viewModel: PassportViewModel = koinViewModel()
 ) {
 
-    val state by viewModel.state.collectAsState()
+    val uiState by viewModel.uiState.collectAsState()
 
-    var localState by remember { mutableStateOf(state) }
-
-    LaunchedEffect(state) {
-        localState = state
-    }
+    val data = uiState.data
+    val isEditing = uiState.isEditing
 
     Column(
         Modifier
@@ -40,51 +37,45 @@ fun PassportScreen(
             .verticalScroll(rememberScrollState())
     ) {
 
-        OutlinedTextField(
-            value = localState.allergens,
-            onValueChange = {
-                localState = localState.copy(allergens = it)
-            },
-            label = { Text("Аллергены (опасно)") }
+        Header(
+            isEditing = isEditing,
+            onToggle = { viewModel.toggleEdit() }
         )
 
-        Spacer(Modifier.height(8.dp))
 
-        OutlinedTextField(
-            value = localState.meds,
-            onValueChange = {
-                localState = localState.copy(meds = it)
-            },
-            label = { Text("Препараты") }
+
+        AllergensBlock(
+            allergens = data.allergens,
+            isEditing = isEditing,
+            onAdd = { new ->
+                viewModel.updateAllergens(data.allergens + new)
+            }
         )
 
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(12.dp))
 
-        OutlinedTextField(
-            value = localState.doctor,
-            onValueChange = {
-                localState = localState.copy(doctor = it)
-            },
-            label = { Text("Врач") }
+        MedicinesBlock(
+            medicines = data.medicines,
+            isEditing = isEditing,
+            onAdd = { med ->
+                viewModel.updateMeds(data.medicines + med)
+            }
         )
 
-        Spacer(Modifier.height(8.dp))
+        Spacer(Modifier.height(12.dp))
 
-        OutlinedTextField(
-            value = localState.contact,
-            onValueChange = {
-                localState = localState.copy(contact = it)
+        ContactsBlock(
+            doctor = data.doctor,
+            contact = data.contact,
+            isEditing = isEditing,
+            onDoctorChange = { value ->
+                viewModel.updateDoctor(value)
             },
-            label = { Text("Контакт") }
+            onContactChange = { value ->
+                viewModel.updateContact(value)
+            }
         )
 
-        Spacer(Modifier.height(16.dp))
-
-        Button(
-            onClick = { viewModel.save(localState) },
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text("Сохранить")
-        }
+        Spacer(Modifier.height(24.dp))
     }
 }

@@ -26,7 +26,7 @@ class DataStoreManager(
     val passportFlow = context.dataStore.data.map { prefs ->
         val raw = prefs[PASSPORT]
         if (raw == null) {
-            PassportData("", "", "", "")
+            PassportData(emptyList(), emptyList(), "", "")
         } else {
             json.decodeFromString<PassportData>(raw)
         }
