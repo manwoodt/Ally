@@ -21,6 +21,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.study.ally.ui.theme.Primary
+import com.study.ally.ui.theme.PrimaryContainer
 
 @Composable
 fun AllergensBlock(
@@ -41,7 +43,7 @@ fun AllergensBlock(
             allergens.forEach {
                 Card(
                     colors = CardDefaults.cardColors(
-                        containerColor = Color(0xFFFFCDD2)
+                        containerColor = PrimaryContainer
                     )
                 ) {
                     Text(it, Modifier.padding(12.dp))

@@ -19,7 +19,8 @@ fun DiaryScreen(
 ) {
 
     val entries by viewModel.entries.collectAsState()
-    val text by viewModel.input.collectAsState()
+    val events by viewModel.eventsInput.collectAsState()
+    val medications by viewModel.medicationsInput.collectAsState()
 
     Column(
         modifier = Modifier
@@ -28,11 +29,15 @@ fun DiaryScreen(
     ) {
 
         DiaryInputBlock(
-            text = text,
-            onTextChange = { value ->
-                viewModel.onTextChange(value)
+            eventsText = events,
+            onEventsTextChange = { value ->
+                viewModel.onEventsChange(value)
             },
-            onAddClick = { viewModel.add() },
+            medicationsText = medications,
+            onMedicationsTextChange = { value ->
+                viewModel.onMedicationsChange(value)
+            },
+            onAddClick = { viewModel.add() }
         )
 
         Spacer(modifier = Modifier.height(16.dp))

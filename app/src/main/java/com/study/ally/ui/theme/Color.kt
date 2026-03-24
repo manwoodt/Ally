@@ -2,30 +2,24 @@ package com.study.ally.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-// Основные цвета
-val Primary = Color(0xFFB3E5FC)
-val Secondary = Color(0xFF81D4FA)
-val Background = Color(0xFFFFFBF2) // можно оставить тёплый нейтральный фон
+val Background = Color(0xFFEAE3F4)
+val Surface = Color(0xFFD6C7ED)
+val SurfaceVariant = Color(0xFFDCCFEF)
 
-// Surface
-val Surface = Color(0xFFFFFFFF)
-val SurfaceVariant = Color(0xFFE3F2FD)
+val Primary = Color(0xFFC5AEE0)
+val Secondary = Color(0xFFE8BFD9)
 
-// Контейнеры
-val PrimaryContainer = Color(0xFFD6F2FF)
-val SecondaryContainer = Color(0xFFB3E5FC)
+val PrimaryContainer = Color(0xFFD6C7ED)
+val SecondaryContainer = Color(0xFFDCCFEF)
 
-// Текст на контейнерах
 val OnPrimary = Color(0xFF000000)
 val OnSecondary = Color(0xFF000000)
 val OnBackground = Color(0xFF000000)
 val OnSurface = Color(0xFF000000)
 val OnSurfaceVariant = Color(0xFF37474F)
 
-// Границы и акценты
-val Outline = Color(0xFFB0BEC5)
+val Outline = Color(0xFFB89AD6)
 
-// Navigation / elevated surfaces
-val SurfaceContainer = Color(0xFFF5F9FC)
-val SurfaceContainerHigh = Color(0xFFEAF3F8)
-val SurfaceContainerHighest = Color(0xFFE3EDF2)
+val SurfaceContainer = Color(0xFFF0E9FA)
+val SurfaceContainerHigh = Color(0xFFE9E0F5)
+val SurfaceContainerHighest = Color(0xFFE2D7F0)

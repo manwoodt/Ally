@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Info
@@ -20,9 +21,11 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun DiaryInputBlock(
-    text: String,
-    onTextChange: (String) -> Unit,
-    onAddClick: () -> Unit,
+    eventsText: String,
+    onEventsTextChange: (String) -> Unit,
+    medicationsText: String,
+    onMedicationsTextChange: (String) -> Unit,
+    onAddClick: (String) -> Unit,
 ) {
 
     ElevatedCard(
@@ -30,12 +33,11 @@ fun DiaryInputBlock(
         elevation = CardDefaults.elevatedCardElevation(6.dp)
     ) {
         Column(modifier = Modifier.padding(12.dp)) {
-
             OutlinedTextField(
-                value = text,
-                onValueChange = onTextChange,
+                value = eventsText,
+                onValueChange = onEventsTextChange,
                 modifier = Modifier.fillMaxWidth(),
-                label = { Text("Что съел / триггер") },
+                label = { Text("Предшествующие события") },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Info,
@@ -43,15 +45,32 @@ fun DiaryInputBlock(
                     )
                 }
             )
-
             Spacer(modifier = Modifier.height(8.dp))
-
+            OutlinedTextField(
+                value = medicationsText,
+                onValueChange = onMedicationsTextChange,
+                modifier = Modifier.fillMaxWidth(),
+                label = { Text("Принятые препараты") },
+                leadingIcon = {
+                    Icon(
+                        imageVector = Icons.Default.Info,
+                        contentDescription = null
+                    )
+                }
+            )
+            Spacer(modifier = Modifier.height(8.dp))
             Button(
-                onClick = onAddClick,
+                onClick = {
+                    // Объединяем оба поля в одну строку
+                    val combined = listOf(eventsText, medicationsText)
+                        .filter { it.isNotBlank() }
+                        .joinToString("; ")
+                    onAddClick(combined)
+                },
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Icon(Icons.Default.Add, contentDescription = null)
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.width(4.dp))
                 Text("Добавить запись")
             }
         }

@@ -10,13 +10,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-
 class DiaryViewModel(
     private val dataStore: DataStoreManager,
 ) : ViewModel() {
 
-    private val _input = MutableStateFlow("")
-    val input: StateFlow<String> = _input
+    private val _eventsInput = MutableStateFlow("")
+    val eventsInput: StateFlow<String> = _eventsInput
+
+    private val _medicationsInput = MutableStateFlow("")
+    val medicationsInput: StateFlow<String> = _medicationsInput
 
     val entries = dataStore.diaryFlow.stateIn(
         viewModelScope,
@@ -24,28 +26,37 @@ class DiaryViewModel(
         emptyList()
     )
 
-    fun onTextChange(value: String) {
-        _input.value = value
+    fun onEventsChange(value: String) {
+        _eventsInput.value = value
+    }
+
+    fun onMedicationsChange(value: String) {
+        _medicationsInput.value = value
     }
 
     fun add() {
+        val events = _eventsInput.value.trim()
+        val medications = _medicationsInput.value.trim()
 
-        val text = _input.value.trim()
+        val combined = buildString {
+            if (events.isNotBlank()) append(events)
+            if (events.isNotBlank() && medications.isNotBlank()) append("; ")
+            if (medications.isNotBlank()) append(medications)
+        }
 
-        if (text.isEmpty()) return
+        if (combined.isEmpty()) return
 
-        val new = DiaryEntry(
+        val newEntry = DiaryEntry(
             id = System.currentTimeMillis().toInt(),
-            text = text,
+            text = combined,
             timestamp = System.currentTimeMillis()
         )
 
-        val updated = entries.value + new
+        val updated = entries.value + newEntry
 
         viewModelScope.launch {
             dataStore.saveDiary(updated)
         }
 
-        _input.value = ""
     }
 }

@@ -1,28 +1,52 @@
 package com.study.ally.presentation.screens.symptoms
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableFloatStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.study.ally.presentation.utils.toIntensityText
+import com.study.ally.ui.theme.Primary
 import org.koin.androidx.compose.koinViewModel
 
+private val symptomsList = listOf(
+    "Чихание",
+    "Заложенность носа",
+    "Зуд",
+    "Глазные проявления (слезотечение, покраснение)",
+    "Кашель",
+    "Першение в горле",
+    "Удушье",
+    "Отёки"
+)
+
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun SymptomsScreen(
     viewModel: SymptomsViewModel = koinViewModel(),
@@ -44,14 +68,7 @@ fun SymptomsScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        val availableSymptoms = listOf(
-            "Чихание",
-            "Зуд",
-            "Слезы",
-            "Кашель"
-        )
-
-        availableSymptoms.forEach { name ->
+        symptomsList.forEach { name ->
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -81,7 +98,15 @@ fun SymptomsScreen(
                 value = state.intensity,
                 onValueChange = viewModel::onIntensityChange,
                 valueRange = 1f..3f,
-                steps = 1
+                steps = 1,
+                thumb = {
+                    Box(
+                        modifier = Modifier
+                            .size(20.dp)
+                            .clip(CircleShape)
+                               .background(Primary)
+                    )
+                },
             )
 
             Button(
